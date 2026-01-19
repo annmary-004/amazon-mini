@@ -1,0 +1,134 @@
+* {
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.checkout-page {
+  display: flex;
+  gap: 20px;
+  padding: 20px;
+  background: #eaeded;
+}
+
+.checkout-left {
+  flex: 3;
+}
+
+.checkout-right {
+  flex: 1;
+}
+
+/* SECTION */
+.checkout-section {
+  background: #fff;
+  padding: 18px 20px;
+  margin-bottom: 16px;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.checkout-section h3 {
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* STEP NUMBER */
+.step {
+  display: inline-block;
+  background: #1a73e8;
+  color: white;
+  font-size: 12px;
+  font-weight: bold;
+  width: 18px;
+  height: 18px;
+  text-align: center;
+  line-height: 18px;
+  border-radius: 3px;
+  margin-right: 10px;
+}
+
+/* ITEMS */
+.checkout-item {
+  display: flex;
+  gap: 15px;
+  border-top: 1px solid #ddd;
+  padding-top: 15px;
+  margin-top: 15px;
+}
+
+.checkout-item img {
+  width: 100px;
+  object-fit: contain;
+}
+
+.checkout-item .title {
+  font-weight: 600;
+}
+
+.checkout-item .price {
+  color: #b12704;
+  font-weight: bold;
+}
+
+/* PAYMENT OPTIONS */
+.payment-option {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 6px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.payment-option:hover {
+  background: #f7fafa;
+}
+
+.payment-option input {
+  cursor: pointer;
+}
+
+.payment-option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* ORDER SUMMARY */
+.order-summary {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.order-summary h3 {
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+
+.order-summary .row {
+  display: flex;
+  justify-content: space-between;
+  margin: 8px 0;
+}
+
+.order-summary .total {
+  font-weight: bold;
+  color: #b12704;
+}
+
+/* BUTTON */
+.place-order-btn {
+  width: 100%;
+  margin-top: 15px;
+  padding: 10px;
+  background: #f0c14b;
+  border: 1px solid #a88734;
+  cursor: pointer;
+}
+
+.place-order-btn:hover {
+  background: #ddb347;
+}

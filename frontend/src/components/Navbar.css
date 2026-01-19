@@ -1,0 +1,91 @@
+* {
+  box-sizing: border-box; /* ✅ VERY IMPORTANT */
+}
+
+.navbar {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  height: 60px;
+  background: #131921;
+  display: flex;
+  align-items: center;
+  padding: 0 15px;
+  color: white;
+  z-index: 100;
+  overflow-x: hidden; /* ✅ PREVENT HORIZONTAL CUT */
+}
+
+.nav-logo img {
+  width: 100px;
+  object-fit: contain;
+  flex-shrink: 0; /* ✅ NEVER SHRINK LOGO */
+}
+
+.nav-search {
+  flex: 1;
+  display: flex;
+  margin: 0 15px;
+  min-width: 200px; /* ✅ SEARCH CAN SHRINK */
+}
+
+.nav-search input {
+  flex: 1;
+  padding: 8px;
+  border: none;
+  outline: none;
+}
+
+.nav-search button {
+  width: 45px;
+  background: #febd69;
+  border: none;
+  cursor: pointer;
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  white-space: nowrap; /* ✅ PREVENT WRAPPING */
+  flex-shrink: 0; /* ✅ KEEP LOGOUT VISIBLE */
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  font-size: 12px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.nav-item strong {
+  font-size: 13px;
+}
+.nav-cart {
+  font-size: 22px;
+  color: white;
+  text-decoration: none;
+  position: relative;
+}
+
+.cart-count {
+  font-size: 12px;
+  font-weight: bold;
+  margin-left: 4px;
+}
+
+.logout-btn {
+  background: transparent;
+  border: 1px solid white;
+  color: white;
+  padding: 5px 10px;
+  cursor: pointer;
+  border-radius: 2px;
+}
+
+.logout-btn:hover {
+  background: white;
+  color: #131921;
+}

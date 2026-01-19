@@ -1,0 +1,20 @@
+.product-row {
+  margin-bottom: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 4px;
+}
+
+/* SECTION TITLE */
+.row-title {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+/* PRODUCTS GRID */
+.row-products {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}

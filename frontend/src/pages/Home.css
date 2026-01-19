@@ -1,0 +1,16 @@
+.home {
+  padding: 20px;
+  background: #eaeded;
+  min-height: calc(100vh - 60px); /* navbar height */
+}
+.search-title {
+  margin: 20px;
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.no-results {
+  margin: 20px;
+  font-size: 16px;
+  color: #555;
+}

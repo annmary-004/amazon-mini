@@ -1,0 +1,40 @@
+.wishlist-page {
+  padding: 20px;
+  max-width: 1100px;
+  margin: auto;
+}
+
+.wishlist-item {
+  display: flex;
+  background: white;
+  padding: 15px;
+  margin-bottom: 15px;
+  border-radius: 6px;
+  gap: 20px;
+}
+
+.wishlist-item img {
+  width: 120px;
+  object-fit: contain;
+}
+
+.wishlist-info .title {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.wishlist-info .price {
+  color: #b12704;
+  font-weight: bold;
+}
+
+.wishlist-actions button {
+  margin-right: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+.wishlist-actions .remove {
+  background: none;
+  color: #007185;
+}
