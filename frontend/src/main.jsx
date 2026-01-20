@@ -3,9 +3,9 @@ import ReactDOM from "react-dom/client";
 import { BrowserRouter } from "react-router-dom";
 import App from "./App";
 
-import { CartProvider } from "./context/CartContext";
-import { AuthProvider } from "./context/AuthContext";
-import { WishlistProvider } from "./context/WishlistContext"; // ✅ ADD THIS
+import { CartProvider } from "./context/CartContext.jsx";
+import { AuthProvider } from "./context/AuthContext.jsx";
+import { WishlistProvider } from "./context/WishlistContext.jsx"; // ✅ ADD THIS
 
 import { Toaster } from "react-hot-toast";
 
