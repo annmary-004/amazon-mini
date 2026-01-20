@@ -5,7 +5,7 @@ import App from "./App";
 
 import { CartProvider } from "./context/CartContext.jsx";
 import { AuthProvider } from "./context/AuthContext.jsx";
-import { WishlistProvider } from "./context/WishlistContext.jsx"; // ✅ ADD THIS
+import { WishlistProvider } from "./context/WishlistContext.jsx"; 
 
 import { Toaster } from "react-hot-toast";
 
@@ -14,7 +14,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <BrowserRouter>
       <AuthProvider>
         <CartProvider>
-          <WishlistProvider> {/* ✅ WRAP HERE */}
+          <WishlistProvider> 
             <App />
             <Toaster position="top-right" reverseOrder={false} />
           </WishlistProvider>
