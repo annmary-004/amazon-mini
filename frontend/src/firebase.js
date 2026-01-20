@@ -6,11 +6,10 @@ const firebaseConfig = {
   apiKey: "AIzaSyC6oUTMTv0dCa07wjqGHHsmhc1h3Gri2nE",
   authDomain: "mini-38fde.firebaseapp.com",
   projectId: "mini-38fde",
-  storageBucket: "mini-38fde.appspot.com",
+  storageBucket: "mini-38fde.firebasestorage.app",
   messagingSenderId: "349061423994",
-  appId: "1:349061423994:web:81e39a7961bb681a0b2cc3",
+  appId: "1:349061423994:web:81e39a7961bb681a0b2cc3"
 };
-
 // 🔥 Initialize Firebase
 const app = initializeApp(firebaseConfig);
 
