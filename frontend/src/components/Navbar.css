@@ -1,91 +1,95 @@
-* {
-  box-sizing: border-box; /* ✅ VERY IMPORTANT */
-}
-
 .navbar {
-  position: fixed;
-  top: 0;
-  width: 100%;
-  height: 60px;
-  background: #131921;
   display: flex;
   align-items: center;
-  padding: 0 15px;
-  color: white;
-  z-index: 100;
-  overflow-x: hidden; /* ✅ PREVENT HORIZONTAL CUT */
+  background: #131921;
+  padding: 10px;
+  gap: 10px;
 }
 
 .nav-logo img {
   width: 100px;
-  object-fit: contain;
-  flex-shrink: 0; /* ✅ NEVER SHRINK LOGO */
 }
 
 .nav-search {
-  flex: 1;
   display: flex;
-  margin: 0 15px;
-  min-width: 200px; /* ✅ SEARCH CAN SHRINK */
+  flex: 1;
 }
 
 .nav-search input {
   flex: 1;
   padding: 8px;
   border: none;
-  outline: none;
 }
 
 .nav-search button {
-  width: 45px;
-  background: #febd69;
+  padding: 8px 12px;
   border: none;
+  background: #febd69;
   cursor: pointer;
 }
 
 .nav-links {
   display: flex;
   align-items: center;
-  gap: 20px;
-  white-space: nowrap; /* ✅ PREVENT WRAPPING */
-  flex-shrink: 0; /* ✅ KEEP LOGOUT VISIBLE */
+  gap: 15px;
 }
 
 .nav-item {
-  display: flex;
-  flex-direction: column;
-  font-size: 12px;
   color: white;
+  font-size: 12px;
   text-decoration: none;
-  cursor: pointer;
 }
 
-.nav-item strong {
-  font-size: 13px;
-}
 .nav-cart {
-  font-size: 22px;
   color: white;
-  text-decoration: none;
-  position: relative;
+  font-size: 18px;
 }
 
 .cart-count {
-  font-size: 12px;
   font-weight: bold;
   margin-left: 4px;
 }
 
 .logout-btn {
   background: transparent;
-  border: 1px solid white;
   color: white;
-  padding: 5px 10px;
+  border: 1px solid #fff;
+  padding: 4px 8px;
   cursor: pointer;
-  border-radius: 2px;
 }
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    align-items: stretch;
+  }
 
-.logout-btn:hover {
-  background: white;
-  color: #131921;
+  .nav-logo {
+    text-align: center;
+  }
+
+  .nav-logo img {
+    width: 90px;
+    margin: auto;
+  }
+
+  .nav-search {
+    width: 100%;
+    margin: 8px 0;
+  }
+
+  .nav-links {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    text-align: center;
+  }
+
+  .nav-cart {
+    justify-self: center;
+  }
+
+  .logout-btn {
+    grid-column: span 2;
+    margin-top: 6px;
+  }
 }
