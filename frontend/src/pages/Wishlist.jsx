@@ -1,5 +1,5 @@
-import { useWishlist } from "../context/WishlistContext";
-import { useCart } from "../context/CartContext";
+import { useWishlist } from "../context/WishlistContext.jsx";
+import { useCart } from "../context/CartContext.jsx";
 import "./Wishlist.css";
 
 function Wishlist() {
