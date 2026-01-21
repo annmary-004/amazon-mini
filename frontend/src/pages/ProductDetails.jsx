@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import { useCart } from "../context/CartContext";
 import toast from "react-hot-toast";
 import ProductRow from "../components/ProductRow";
+import API_BASE from "../utils/api";
 import "./ProductDetails.css";
 
 function ProductDetails() {
@@ -17,16 +18,27 @@ function ProductDetails() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await fetch(`http://localhost:5000/api/products/${id}`);
+        // 🔹 SINGLE PRODUCT
+        const res = await fetch(
+          `${API_BASE}/api/products/${id}`
+        );
         if (!res.ok) throw new Error();
         const data = await res.json();
         setProduct(data);
 
-        // related products
-        const all = await fetch("http://localhost:5000/api/products");
-        const allData = await all.json();
-        setRelated(allData.filter(p => p._id !== data._id).slice(0, 5));
-      } catch {
+        // 🔹 RELATED PRODUCTS
+        const allRes = await fetch(
+          `${API_BASE}/api/products`
+        );
+        const allData = await allRes.json();
+
+        setRelated(
+          allData
+            .filter((p) => p._id !== data._id)
+            .slice(0, 5)
+        );
+      } catch (err) {
+        console.error(err);
         toast.error("Product not found");
         navigate("/");
       } finally {
@@ -37,12 +49,14 @@ function ProductDetails() {
     fetchData();
   }, [id, navigate]);
 
-  if (loading) return <h2 style={{ padding: 20 }}>Loading...</h2>;
+  if (loading)
+    return <h2 style={{ padding: 20 }}>Loading...</h2>;
+
   if (!product) return null;
 
   return (
     <>
-      {/* ================= PDP ================= */}
+      {/* ================= PRODUCT DETAILS ================= */}
       <div className="pdp-container">
 
         {/* LEFT – IMAGE */}
@@ -58,7 +72,6 @@ function ProductDetails() {
             ⭐ {product.rating || 4.3} | 1,200 ratings
           </div>
 
-          {/* PRIME */}
           <div className="prime">
             <img
               src="https://upload.wikimedia.org/wikipedia/commons/b/bb/Amazon_Prime_logo.svg"
@@ -78,7 +91,6 @@ function ProductDetails() {
             <li>✔ Secure packaging</li>
           </ul>
 
-          {/* REVIEWS */}
           <div className="reviews">
             <h3>Customer reviews</h3>
             <p><b>Arjun:</b> Excellent product quality ⭐⭐⭐⭐☆</p>
@@ -117,7 +129,10 @@ function ProductDetails() {
 
       {/* ================= RELATED ================= */}
       <div className="related">
-        <ProductRow title="Related products" products={related} />
+        <ProductRow
+          title="Related products"
+          products={related}
+        />
       </div>
     </>
   );

@@ -2,6 +2,9 @@ import { useParams, useNavigate } from "react-router-dom";
 import { useEffect, useState } from "react";
 import "./OrderDetails.css";
 
+// ✅ BACKEND URL FROM ENV
+const API_URL = import.meta.env.VITE_API_URL;
+
 function OrderDetails() {
   const { orderId } = useParams();
   const navigate = useNavigate();
@@ -14,7 +17,7 @@ function OrderDetails() {
     const fetchOrder = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/orders/${orderId}`
+          `${API_URL}/api/orders/${orderId}`
         );
         const data = await res.json();
         setOrder(data);
@@ -25,6 +28,7 @@ function OrderDetails() {
         setLoading(false);
       }
     };
+
     fetchOrder();
   }, [orderId, navigate]);
 
@@ -33,9 +37,10 @@ function OrderDetails() {
 
     try {
       setCancelLoading(true);
-      await fetch(`http://localhost:5000/api/orders/${orderId}`, {
+      await fetch(`${API_URL}/api/orders/${orderId}`, {
         method: "PUT",
       });
+
       setOrder({ ...order, status: "Cancelled" });
     } catch {
       alert("Unable to cancel order");
@@ -68,9 +73,7 @@ function OrderDetails() {
 
         {/* TRACKING */}
         <div className="tracking-bar">
-          <span className={order.status !== "Cancelled" ? "active" : ""}>
-            Order Placed
-          </span>
+          <span className="active">Order Placed</span>
           <span className={order.status === "Shipped" ? "active" : ""}>
             Shipped
           </span>

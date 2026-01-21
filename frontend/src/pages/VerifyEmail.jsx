@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import API_BASE from "../utils/api";
 import "./VerifyEmail.css";
 
 function VerifyEmail() {
@@ -9,7 +10,7 @@ function VerifyEmail() {
   const [generatedOtp, setGeneratedOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // ⚠️ TEMP DEMO DATA (normally comes from signup / context)
+  // 🔐 DATA FROM SIGNUP
   const name = localStorage.getItem("name");
   const mobile = localStorage.getItem("mobile");
   const email = localStorage.getItem("email");
@@ -21,6 +22,8 @@ function VerifyEmail() {
   const generateOtp = () => {
     const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
     setGeneratedOtp(newOtp);
+
+    // ⚠️ DEMO ONLY
     alert("Demo OTP: " + newOtp);
   };
 
@@ -36,12 +39,10 @@ function VerifyEmail() {
       setLoading(true);
 
       const res = await fetch(
-        "http://localhost:5000/api/auth/verify-user",
+        `${API_BASE}/api/auth/verify-user`,
         {
           method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
+          headers: { "Content-Type": "application/json" },
           body: JSON.stringify({
             name,
             mobile,
@@ -53,10 +54,16 @@ function VerifyEmail() {
       if (!res.ok) throw new Error("Save failed");
 
       alert("Account verified successfully ✅");
+
+      // cleanup
+      localStorage.removeItem("name");
+      localStorage.removeItem("mobile");
+      localStorage.removeItem("email");
+
       navigate("/");
     } catch (err) {
-      alert("Verification failed");
       console.error(err);
+      alert("Verification failed");
     } finally {
       setLoading(false);
     }
@@ -70,9 +77,12 @@ function VerifyEmail() {
         <form onSubmit={handleVerify}>
           <label>Enter OTP</label>
           <input
+            type="text"
             maxLength={6}
             value={otp}
-            onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
+            onChange={(e) =>
+              setOtp(e.target.value.replace(/\D/g, ""))
+            }
             required
           />
 

@@ -2,6 +2,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 import { useAuth } from "../context/AuthContext";
 import { useState } from "react";
+import API_BASE from "../utils/api.js";
 import "./ReviewOrder.css";
 
 function ReviewOrder() {
@@ -31,7 +32,6 @@ function ReviewOrder() {
   const [loading, setLoading] = useState(false);
 
   const handlePlaceOrder = async () => {
-    // BASIC VALIDATION
     if (
       !address.name ||
       !address.phone ||
@@ -46,7 +46,7 @@ function ReviewOrder() {
 
     setLoading(true);
 
-    // ✅ BACKEND COMPATIBLE ITEMS
+    // ✅ BACKEND FORMAT
     const orderItems = cart.map((item) => ({
       title: item.name,
       price: item.price,
@@ -55,23 +55,20 @@ function ReviewOrder() {
     }));
 
     try {
-      const res = await fetch(
-        "http://localhost:5000/api/orders/place",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            userId: user.uid,
-            email: user.email,
-            address,
-            items: orderItems,
-            paymentMethod,
-            subtotal,
-            delivery,
-            total,
-          }),
-        }
-      );
+      const res = await fetch(`${API_BASE}/api/orders/place`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          userId: user.uid,
+          email: user.email,
+          address,
+          items: orderItems,
+          paymentMethod,
+          subtotal,
+          delivery,
+          total,
+        }),
+      });
 
       if (!res.ok) throw new Error("Order failed");
 
@@ -95,34 +92,62 @@ function ReviewOrder() {
           <div className="box">
             <h3>Delivery address</h3>
 
-            <input placeholder="Full Name"
-              onChange={e => setAddress({ ...address, name: e.target.value })} />
+            <input
+              placeholder="Full Name"
+              onChange={(e) =>
+                setAddress({ ...address, name: e.target.value })
+              }
+            />
 
-            <input placeholder="Mobile Number"
+            <input
+              placeholder="Mobile Number"
               maxLength="10"
-              onChange={e => setAddress({ ...address, phone: e.target.value })} />
+              onChange={(e) =>
+                setAddress({ ...address, phone: e.target.value })
+              }
+            />
 
-            <input placeholder="Street / Area"
-              onChange={e => setAddress({ ...address, street: e.target.value })} />
+            <input
+              placeholder="Street / Area"
+              onChange={(e) =>
+                setAddress({ ...address, street: e.target.value })
+              }
+            />
 
-            <input placeholder="Landmark (optional)"
-              onChange={e => setAddress({ ...address, landmark: e.target.value })} />
+            <input
+              placeholder="Landmark (optional)"
+              onChange={(e) =>
+                setAddress({ ...address, landmark: e.target.value })
+              }
+            />
 
-            <input placeholder="City"
-              onChange={e => setAddress({ ...address, city: e.target.value })} />
+            <input
+              placeholder="City"
+              onChange={(e) =>
+                setAddress({ ...address, city: e.target.value })
+              }
+            />
 
-            <input placeholder="State"
-              onChange={e => setAddress({ ...address, state: e.target.value })} />
+            <input
+              placeholder="State"
+              onChange={(e) =>
+                setAddress({ ...address, state: e.target.value })
+              }
+            />
 
-            <input placeholder="Pincode"
+            <input
+              placeholder="Pincode"
               maxLength="6"
-              onChange={e => setAddress({ ...address, pincode: e.target.value })} />
+              onChange={(e) =>
+                setAddress({ ...address, pincode: e.target.value })
+              }
+            />
           </div>
 
           <div className="box">
             <h3>Items</h3>
 
-            {cart.map(item => (
+            {cart.map((item) => (
               <div key={item._id} className="item-row">
                 <img src={item.image} alt={item.name} />
                 <div>

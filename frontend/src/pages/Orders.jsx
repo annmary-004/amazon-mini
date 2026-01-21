@@ -3,6 +3,9 @@ import { useAuth } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import "./Orders.css";
 
+// ✅ BACKEND URL FROM ENV
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Orders() {
   const { user } = useAuth();
   const navigate = useNavigate();
@@ -16,7 +19,7 @@ function Orders() {
     const fetchOrders = async () => {
       try {
         const res = await fetch(
-          `http://localhost:5000/api/orders/user/${user.uid}`
+          `${API_URL}/api/orders/user/${user.uid}`
         );
         const data = await res.json();
 

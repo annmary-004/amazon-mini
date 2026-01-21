@@ -4,6 +4,9 @@ import ProductRow from "../components/ProductRow";
 import toast from "react-hot-toast";
 import "./Home.css";
 
+// ✅ BACKEND URL FROM ENV
+const API_URL = import.meta.env.VITE_API_URL;
+
 function Home() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -16,7 +19,7 @@ function Home() {
   useEffect(() => {
     const fetchProducts = async () => {
       try {
-        const res = await fetch("http://localhost:5000/api/products");
+        const res = await fetch(`${API_URL}/api/products`);
         const data = await res.json();
         setProducts(data);
       } catch (err) {
