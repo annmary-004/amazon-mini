@@ -8,10 +8,14 @@ const router = express.Router();
 ========================= */
 router.post("/verify-user", async (req, res) => {
   try {
-    const { name, mobile, email } = req.body;
+    const { name, email, mobile } = req.body;
 
-    // check if user already exists
-    let user = await User.findOne({ mobile });
+    if (!email) {
+      return res.status(400).json({ message: "Email required" });
+    }
+
+    // ✅ Find user by EMAIL (not mobile)
+    let user = await User.findOne({ email });
 
     if (user) {
       user.isVerified = true;
@@ -19,14 +23,15 @@ router.post("/verify-user", async (req, res) => {
     } else {
       user = await User.create({
         name,
-        mobile,
         email,
+        mobile,
         isVerified: true,
       });
     }
 
     res.status(200).json({
-      message: "User verified & saved",
+      success: true,
+      message: "User verified successfully",
       user,
     });
   } catch (error) {
