@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import "../pages/Auth.css";
 import logo from "../assets/amazon-logo.png";
@@ -7,8 +7,20 @@ function VerifyOTP() {
   const [otp, setOtp] = useState("");
   const navigate = useNavigate();
 
+  useEffect(() => {
+    // generate OTP when page loads
+    const generatedOtp = Math.floor(100000 + Math.random() * 900000).toString();
+    localStorage.setItem("otp", generatedOtp);
+
+    // demo only
+    alert("Demo OTP: " + generatedOtp);
+  }, []);
+
   const handleVerify = () => {
-    if (otp === "123456") {
+    const storedOtp = localStorage.getItem("otp");
+
+    if (otp === storedOtp) {
+      localStorage.removeItem("otp");
       navigate("/");
     } else {
       alert("Invalid OTP ❌");
@@ -25,16 +37,13 @@ function VerifyOTP() {
         <label>Enter OTP</label>
         <input
           value={otp}
-          onChange={(e) => setOtp(e.target.value)}
+          maxLength={6}
+          onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
         />
 
         <button className="primary-btn" onClick={handleVerify}>
           Verify
         </button>
-
-        <p className="auth-text">
-          Demo OTP: <b>123456</b>
-        </p>
       </div>
     </div>
   );

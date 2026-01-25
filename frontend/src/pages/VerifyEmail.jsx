@@ -7,10 +7,8 @@ function VerifyEmail() {
   const navigate = useNavigate();
 
   const [otp, setOtp] = useState("");
-  const [generatedOtp, setGeneratedOtp] = useState("");
   const [loading, setLoading] = useState(false);
 
-  // 🔐 DATA FROM SIGNUP
   const name = localStorage.getItem("name");
   const mobile = localStorage.getItem("mobile");
   const email = localStorage.getItem("email");
@@ -21,16 +19,20 @@ function VerifyEmail() {
 
   const generateOtp = () => {
     const newOtp = Math.floor(100000 + Math.random() * 900000).toString();
-    setGeneratedOtp(newOtp);
 
-    // ⚠️ DEMO ONLY
+    // ✅ store OTP safely
+    localStorage.setItem("generatedOtp", newOtp);
+
+    // ⚠️ demo only
     alert("Demo OTP: " + newOtp);
   };
 
   const handleVerify = async (e) => {
     e.preventDefault();
 
-    if (otp !== generatedOtp) {
+    const storedOtp = localStorage.getItem("generatedOtp");
+
+    if (otp !== storedOtp) {
       alert("Invalid OTP ❌");
       return;
     }
@@ -38,18 +40,11 @@ function VerifyEmail() {
     try {
       setLoading(true);
 
-      const res = await fetch(
-        `${API_BASE}/api/auth/verify-user`,
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({
-            name,
-            mobile,
-            email,
-          }),
-        }
-      );
+      const res = await fetch(`${API_BASE}/api/auth/verify-user`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, mobile, email }),
+      });
 
       if (!res.ok) throw new Error("Save failed");
 
@@ -59,6 +54,7 @@ function VerifyEmail() {
       localStorage.removeItem("name");
       localStorage.removeItem("mobile");
       localStorage.removeItem("email");
+      localStorage.removeItem("generatedOtp");
 
       navigate("/");
     } catch (err) {
@@ -80,9 +76,7 @@ function VerifyEmail() {
             type="text"
             maxLength={6}
             value={otp}
-            onChange={(e) =>
-              setOtp(e.target.value.replace(/\D/g, ""))
-            }
+            onChange={(e) => setOtp(e.target.value.replace(/\D/g, ""))}
             required
           />
 

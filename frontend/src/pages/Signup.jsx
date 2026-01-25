@@ -18,9 +18,16 @@ function Signup() {
 
     try {
       const fakeEmail = `${mobile}@amazonclone.com`;
+
+      // ✅ SAVE DATA FOR OTP PAGE
+      localStorage.setItem("name", name);
+      localStorage.setItem("mobile", mobile);
+      localStorage.setItem("email", fakeEmail);
+
       await signup(fakeEmail, password);
       navigate("/verify-email");
-    } catch {
+    } catch (error) {
+      console.error(error);
       alert("Failed to create account");
     } finally {
       setLoading(false);
@@ -102,7 +109,7 @@ function Signup() {
           <span>Privacy Notice</span>.
         </p>
 
-        {/* ✅ OR + GOOGLE (INSIDE CARD, WIDTH 100%) */}
+        {/* OR */}
         <div className="auth-divider">
           <span>or</span>
         </div>
