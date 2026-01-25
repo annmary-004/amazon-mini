@@ -1,8 +1,4 @@
-// const API_BASE =
-//   import.meta.env.VITE_API_URL || "http://localhost:5000";
-
-// export default API_BASE;
-
-const API_BASE = "https://amazon-mini-backend.onrender.com";
+const API_BASE =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 export default API_BASE;
