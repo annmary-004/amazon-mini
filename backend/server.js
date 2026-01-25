@@ -4,14 +4,20 @@ const cors = require("cors");
 
 const productRoutes = require("./routes/productRoutes");
 const orderRoutes = require("./routes/orderRoutes");
-const authRoutes = require("./routes/authRoutes"); // ✅ ADD THIS
+const authRoutes = require("./routes/authRoutes");
 
 const app = express();
 
 /* =========================
    MIDDLEWARE
 ========================= */
-app.use(cors());
+app.use(
+  cors({
+    origin: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
+  })
+);
 app.use(express.json());
 
 /* =========================
@@ -36,12 +42,12 @@ mongoose
 ========================= */
 app.use("/api/products", productRoutes);
 app.use("/api/orders", orderRoutes);
-app.use("/api/auth", authRoutes); // ✅ ADD THIS
+app.use("/api/auth", authRoutes);
 
 /* =========================
    SERVER
 ========================= */
-const PORT = 5000;
+const PORT = process.env.PORT || 5000;
 
 app.listen(PORT, () => {
   console.log(`🚀 Server running on port ${PORT}`);
